@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Workplace Speaking Hacks - Executive Speaking App</title>
+  
+  <!-- PWA & Mobile Web Capabilities -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Speaking Hacks">
+  <meta name="theme-color" content="#090E1A">
+
+  <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070C18',
+              navy: '#0B132B',
+              surface: '#111D38',
+              card: '#162447',
+              primary: '#2563EB',
+              sky: '#0284C7',
+              emerald: '#10B981',
+              amber: '#F59E0B',
+              rose: '#F43F5E'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Mobile-first smooth container styling */
+    html, body {
+      background-color: #070C18;
+      color: #E2E8F0;
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B132B;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 9999px;
+    }
+
+    .safe-bottom {
+      padding-bottom: calc(env(safe-area-inset-bottom) + 5rem);
+    }
+
+    .safe-top {
+      padding-top: max(env(safe-area-inset-top), 0.75rem);
+    }
+
+    /* Subtle touch animations */
+    .btn-press:active {
+      transform: scale(0.97);
+    }
+
+    /* Text selection enabled for study materials */
+    .selectable {
+      user-select: text;
+    }
+  </style>
+</head>
+<body class="antialiased bg-[#070C18] text-slate-200 min-h-screen flex flex-col justify-between">
+
+  <!-- ==================== TOP APP HEADER ==================== -->
+  <header class="sticky top-0 z-40 bg-[#0B132B]/90 backdrop-blur-xl border-b border-slate-800 safe-top px-4 py-3 shadow-lg">
+    <div class="max-w-2xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-2.5">
+        <button onclick="toggleChapterDrawer(true)" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 btn-press transition" title="Senarai Bab">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+        </button>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <h1 class="font-heading font-extrabold text-xs sm:text-sm tracking-wide text-white">WORKPLACE SPEAKING</h1>
+          </div>
+          <p id="topChapterTitle" class="text-[10px] text-blue-400 font-medium truncate max-w-[200px]">Menu Utama • Semua Bab</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button onclick="switchAppTab('coach')" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-md shadow-emerald-600/20 btn-press">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+          <span class="hidden sm:inline">AI Speaking</span> Coach
+        </button>
+        <button onclick="togglePWAInstallModal(true)" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition" title="Pasang di Telefon">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN VIEW CONTAINER ==================== -->
+  <main class="flex-1 max-w-2xl w-full mx-auto p-4 safe-bottom">
+
+    <!-- VIEW 1: CHAPTER SELECTION DASHBOARD (DEFAULT) -->
+    <section id="view-dashboard" class="space-y-4">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-900/60 via-[#0B132B] to-slate-900 border border-blue-500/20 p-5 shadow-xl">
+        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="relative z-10 space-y-2">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 font-mono text-[9px] font-bold uppercase">
+            ⚡ Edisi Aplikasi Interaktif
+          </span>
+          <h2 class="font-heading font-black text-xl text-white leading-tight">
+            Workplace Speaking Hacks
+          </h2>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Pilih mana-mana bab di bawah untuk mula membaca. Anda tidak perlu skrol panjang; setiap bab diasingkan untuk pembacaan fokus dan kemas.
+          </p>
+          <div class="pt-2 flex items-center justify-between text-[11px] text-slate-400">
+            <span>Kemajuan Membaca:</span>
+            <span id="overallProgressText" class="font-bold text-emerald-400 font-mono">0% Selesai</span>
+          </div>
+          <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+            <div id="overallProgressBar" class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter Navigation Grid Cards -->
+      <div class="space-y-3">
+        <h3 class="font-heading font-bold text-xs uppercase tracking-wider text-slate-400 px-1">
+          Daftar Kandungan & Modul
+        </h3>
+
+        <!-- Card: Pengenalan & Kit Survival -->
+        <div onclick="openChapter('intro')" class="group p-4 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 transition cursor-pointer btn-press flex items-center justify-between shadow-md">
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              00
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-heading font-bold text-sm text-white group-hover:text-blue-300 transition">Kit Survival Dunia Sebenar</h4>
+                <span id="badge-intro" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Selesai</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Bukan buku teks sekolah, peta tindakan 5 modul & peraturan emas.</p>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+
+        <!-- Card: Bab 1 -->
+        <div onclick="openChapter('bab1')" class="group p-4 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 transition cursor-pointer btn-press flex items-center justify-between shadow-md">
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              01
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-heading font-bold text-sm text-white group-hover:text-blue-300 transition">BAB 1: Kenapa Otak Jem?</h4>
+                <span id="badge-bab1" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Selesai</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Mental translation loop, mitos flawless & formula K.I.S.S.</p>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+
+        <!-- Card: Bab 2 -->
+        <div onclick="openChapter('bab2')" class="group p-4 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 transition cursor-pointer btn-press flex items-center justify-between shadow-md">
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              02
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-heading font-bold text-sm text-white group-hover:text-emerald-300 transition">BAB 2: Solo Drills Sampai Lancar</h4>
+                <span id="badge-bab2" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Selesai</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Shadowing 5 minit, monolog harian, audio audit & senaman sebutan.</p>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+
+        <!-- Card: Bab 3 -->
+        <div onclick="openChapter('bab3')" class="group p-4 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-sky-500/50 transition cursor-pointer btn-press flex items-center justify-between shadow-md">
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-sky-600/20 border border-sky-500/30 text-sky-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              03
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-heading font-bold text-sm text-white group-hover:text-sky-300 transition">BAB 3: AI Sparring Partner 24 Jam</h4>
+                <span id="badge-bab3" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Selesai</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Prompt simulasi kafe, temu duga P.E.E.L, semakan bos & audit AI.</p>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-sky-400 transition transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+
+        <!-- Card: Bab 4 -->
+        <div onclick="openChapter('bab4')" class="group p-4 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/50 transition cursor-pointer btn-press flex items-center justify-between shadow-md">
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-amber-600/20 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              04
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-heading font-bold text-sm text-white group-hover:text-amber-300 transition">BAB 4: Skrip Bila Otak Blank</h4>
+                <span id="badge-bab4" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Selesai</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Corporate fillers, circumlocution, 20 frasa bridge & jadual padanan.</p>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-amber-400 transition transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+
+        <!-- Card: Bab 5 -->
+        <div onclick="openChapter('bab5')" class="group p-4 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 transition cursor-pointer btn-press flex items-center justify-between shadow-md">
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
+              05
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-heading font-bold text-sm text-white group-hover:text-indigo-300 transition">BAB 5: Workplace Survival</h4>
+                <span id="badge-bab5" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Selesai</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Small talk lif, menyampuk tertib, diplomasi bantah & 60-sec standup.</p>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 transition transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+
+        <!-- Card: 30-Day Tracker -->
+        <div onclick="switchAppTab('tracker')" class="group p-4 rounded-xl bg-gradient-to-r from-emerald-950/40 to-slate-900 border border-emerald-500/30 hover:border-emerald-400 transition cursor-pointer btn-press flex items-center justify-between shadow-md">
+          <div class="flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base flex-shrink-0">
+              📅
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-sm text-white group-hover:text-emerald-300 transition">30-Day Habit Tracker</h4>
+              <p class="text-[11px] text-slate-400 mt-0.5">Rekod disiplin 30 hari untuk membentuk memori otot percakapan.</p>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-emerald-400">Buka →</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIEW 2: DEDICATED CHAPTER READER (SINGLE CHAPTER ONLY) -->
+    <section id="view-reader" class="hidden space-y-4">
+      
+      <!-- Top Reader Bar: Back to Chapters + Current Badge -->
+      <div class="flex items-center justify-between bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+        <button onclick="backToDashboard()" class="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1.5 font-bold transition btn-press">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          Kembali ke Daftar Bab
+        </button>
+        <span id="readerChapterBadge" class="text-[10px] font-mono font-bold bg-blue-500/10 text-blue-300 border border-blue-400/30 px-2 py-0.5 rounded-full uppercase">
+          BAB 1
+        </span>
+      </div>
+
+      <!-- Dynamic Content Injection Area -->
+      <article id="readerContentArea" class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-5 text-slate-300 leading-relaxed text-xs sm:text-sm selectable shadow-2xl">
+        <!-- Injected via JavaScript based on selected chapter -->
+      </article>
+
+      <!-- Bottom Reader Navigation: Previous & Next Chapter -->
+      <div class="p-3 bg-[#0B132B] rounded-xl border border-slate-800 flex items-center justify-between gap-2 shadow-lg">
+        <button id="readerPrevBtn" onclick="navigateAdjacentChapter(-1)" class="text-xs font-semibold px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 disabled:opacity-30 disabled:pointer-events-none transition flex items-center gap-1">
+          ← Bab Sebelumnya
+        </button>
+        <button id="readerMarkDoneBtn" onclick="toggleChapterDone()" class="text-xs font-bold px-3 py-2 rounded-lg bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-600/50 transition flex items-center gap-1.5">
+          <span>✓</span> Tanda Selesai
+        </button>
+        <button id="readerNextBtn" onclick="navigateAdjacentChapter(1)" class="text-xs font-bold px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-30 disabled:pointer-events-none transition flex items-center gap-1">
+          Bab Seterusnya →
+        </button>
+      </div>
+
+    </section>
+
+    <!-- VIEW 3: GEMINI AI SPEAKING LAB (LIVE VOICE & SPARRING) -->
+    <section id="view-coach" class="hidden space-y-4">
+      <div class="bg-gradient-to-r from-emerald-950/40 to-slate-900 border border-emerald-500/30 rounded-2xl p-4 space-y-1">
+        <div class="flex items-center justify-between">
+          <h2 class="font-heading font-extrabold text-sm text-emerald-300 flex items-center gap-1.5">
+            <span>🎙️</span> AI Speaking Coach & Sparring Lab
+          </h2>
+          <span class="text-[9px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full">gemini-3-flash</span>
+        </div>
+        <p class="text-[11px] text-slate-400">
+          Latih refleks bercakap Bahasa Inggeris 24 jam sehari. AI akan membalas pendek (1-2 ayat) untuk melatih tindak balas spontan anda.
+        </p>
+      </div>
+
+      <!-- Roleplay Scenario Selector -->
+      <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800 space-y-2">
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-slate-400 font-semibold">Pilih Senario:</span>
+          <div class="flex gap-2">
+            <button onclick="requestFeedbackReport()" class="text-[11px] font-bold text-amber-400 hover:underline flex items-center gap-1">
+              <span>📋</span> Laporan Audit
+            </button>
+            <button onclick="resetRoleplayChat()" class="text-[11px] text-slate-400 hover:text-white underline">
+              Mula Semula
+            </button>
+          </div>
+        </div>
+        <select id="roleplaySelect" onchange="changeScenario(this.value)" class="w-full bg-[#070C18] border border-slate-700 text-white rounded-lg p-2 text-xs focus:ring-1 focus:ring-emerald-500">
+          <option value="cafe">☕ Kafe & Barista (Casual Small Talk & Ordering)</option>
+          <option value="interview">👔 Temu Duga HR (Mock Interview • Formula P.E.E.L)</option>
+          <option value="manager">📊 Kemas Kini Projek (Desakan Status Pengurus)</option>
+          <option value="pantry">🤝 Sembang Santai Lif & Pantri (Teknik Ping-Pong)</option>
+        </select>
+      </div>
+
+      <!-- Chat Bubble Container -->
+      <div id="roleplayChatBox" class="min-h-[280px] max-h-[380px] overflow-y-auto space-y-3 p-3.5 bg-[#070C18]/80 rounded-2xl border border-slate-800">
+        <!-- Messages populated by JS -->
+      </div>
+
+      <!-- Shadow Tutor Audit Output -->
+      <div id="feedbackContainer" class="hidden p-3.5 bg-slate-900 border border-amber-500/40 rounded-xl space-y-2 text-xs">
+        <!-- Populated via JS -->
+      </div>
+
+      <!-- Input Bar with Speech Recognition Mic -->
+      <div class="space-y-1.5">
+        <div class="flex gap-2">
+          <div class="relative flex-1">
+            <input id="roleplayUserInput" type="text" onkeydown="if(event.key==='Enter') sendRoleplayMessage()" placeholder="Taip atau tekan mikrofon untuk bersuara..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 pr-10">
+            <button onclick="toggleVoiceInput()" id="micBtn" class="absolute right-2 top-2 p-1 text-slate-400 hover:text-emerald-400 transition" title="Bercakap dengan Mikrofon">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+            </button>
+          </div>
+          <button onclick="sendRoleplayMessage()" id="roleplaySendBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center justify-center btn-press">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+          </button>
+        </div>
+        <div class="flex justify-between items-center text-[10px] text-slate-400 px-1">
+          <span>💡 Tip: AI mengikut peraturan buku (hanya 1-2 ayat).</span>
+          <span id="recordingBadge" class="hidden text-rose-400 font-bold animate-pulse">● Mendengar suara anda...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: QUICK SCRIPT CHEAT SHEET (INSTANT LOOKUP) -->
+    <section id="view-cheatsheet" class="hidden space-y-4">
+      <div class="bg-blue-950/30 border border-blue-500/30 rounded-2xl p-4 space-y-1">
+        <h2 class="font-heading font-extrabold text-sm text-blue-300 flex items-center gap-1.5">
+          <span>⚡</span> Quick Script Cheat Sheet
+        </h2>
+        <p class="text-[11px] text-slate-400">
+          Cari frasa penyelamat kecemasan dalam 3 saat sebelum melangkah masuk ke mesyuarat.
+        </p>
+        <div class="pt-2">
+          <input id="scriptSearchInput" oninput="filterScripts(this.value)" type="text" placeholder="Cari: delay, invoice, wait, don't know..." class="w-full bg-[#070C18] border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500">
+        </div>
+      </div>
+
+      <!-- Quick Script Category Filter Tabs -->
+      <div class="flex gap-2 overflow-x-auto pb-1 text-xs">
+        <button onclick="filterScriptCategory('all')" class="cat-btn active py-1 px-3 rounded-lg bg-blue-600 text-white font-semibold whitespace-nowrap">Semua</button>
+        <button onclick="filterScriptCategory('filler')" class="cat-btn py-1 px-3 rounded-lg bg-slate-800 text-slate-300 font-semibold whitespace-nowrap">Beli Masa (Fillers)</button>
+        <button onclick="filterScriptCategory('replace')" class="cat-btn py-1 px-3 rounded-lg bg-slate-800 text-slate-300 font-semibold whitespace-nowrap">Jangan Cakap X</button>
+        <button onclick="filterScriptCategory('bridge')" class="cat-btn py-1 px-3 rounded-lg bg-slate-800 text-slate-300 font-semibold whitespace-nowrap">Frasa Bridge</button>
+        <button onclick="filterScriptCategory('circum')" class="cat-btn py-1 px-3 rounded-lg bg-slate-800 text-slate-300 font-semibold whitespace-nowrap">Circumlocution</button>
+      </div>
+
+      <!-- Script List Output -->
+      <div id="scriptListContainer" class="space-y-2.5">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 5: 30-DAY HABIT TRACKER -->
+    <section id="view-tracker" class="hidden space-y-4">
+      <div class="bg-emerald-950/40 border border-emerald-500/30 rounded-2xl p-4 space-y-2">
+        <div class="flex justify-between items-center">
+          <div>
+            <h2 class="font-heading font-extrabold text-sm text-emerald-300">30-Day Speaking Habit Tracker</h2>
+            <p class="text-[11px] text-slate-400">10-15 minit sehari. Kunci penguasaan adalah konsistensi mikro.</p>
+          </div>
+          <div class="text-right">
+            <span id="trackerProgressText" class="font-mono text-base font-black text-emerald-400">0/30</span>
+            <p class="text-[9px] text-slate-400 uppercase">Hari Selesai</p>
+          </div>
+        </div>
+        <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+          <div id="trackerProgressBar" class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Day by Day Checklist Items -->
+      <div id="trackerDaysList" class="space-y-2 text-xs">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 6: AI TOOLS (REPHRASER & CIRCUMLOCUTION GYM) -->
+    <section id="view-tools" class="hidden space-y-4">
+      
+      <!-- Sub-Tabs: Rephraser vs Circumlocution Gym -->
+      <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-bold">
+        <button id="toolSubTab1" onclick="switchToolSubTab('rephrase')" class="flex-1 py-2 rounded-lg bg-blue-600 text-white transition">
+          1. Corporate Rephraser
+        </button>
+        <button id="toolSubTab2" onclick="switchToolSubTab('gym')" class="flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition">
+          2. Circumlocution Gym
+        </button>
+      </div>
+
+      <!-- SUB-TAB 1: REPHRASER -->
+      <div id="toolSectionRephrase" class="space-y-3">
+        <div class="bg-blue-950/20 border border-blue-800/30 p-3 rounded-xl space-y-1 text-xs">
+          <p class="text-blue-300 font-bold">Tukar Manglish / Ayat Jem ke 3 Gaya Korporat</p>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Taip idea anda dalam bahasa santai atau ayat tunggang-langgang. Gemini akan memformatkannya kepada versi K.I.S.S, Diplomasi, dan Eksekutif A.R.T.
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <textarea id="rephraseAppInput" rows="2" placeholder="Contoh: bos, saya tak boleh hantar report esok sebab finance lambat bagi angka..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+          
+          <div class="flex flex-wrap gap-1.5 text-[10px]">
+            <span class="text-slate-500 self-center">Contoh Pantas:</span>
+            <button onclick="setRephrasePrompt('bos, report ni delay sikit sebab vendor lambat')" class="bg-slate-800 hover:bg-slate-700 px-2 py-0.5 rounded text-slate-300">Delay Projek</button>
+            <button onclick="setRephrasePrompt('i don\'t know, wait i ask my boss')" class="bg-slate-800 hover:bg-slate-700 px-2 py-0.5 rounded text-slate-300">Tak Tahu Angka</button>
+            <button onclick="setRephrasePrompt('you talk too much, we don\'t have time')" class="bg-slate-800 hover:bg-slate-700 px-2 py-0.5 rounded text-slate-300">Potong Bercakap</button>
+          </div>
+
+          <button onclick="runAppCorporateRephrase()" id="rephraseAppBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-lg shadow-blue-600/20 btn-press">
+            Jana 3 Versi Korporat Berwibawa
+          </button>
+        </div>
+
+        <div id="rephraseAppResults" class="hidden space-y-2.5 pt-2">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- SUB-TAB 2: CIRCUMLOCUTION GYM -->
+      <div id="toolSectionGym" class="hidden space-y-3">
+        <div class="bg-indigo-950/20 border border-indigo-800/30 p-3 rounded-xl space-y-1 text-xs">
+          <p class="text-indigo-300 font-bold">Circumlocution Gym: Ujian Memintas Perkataan</p>
+          <p class="text-[11px] text-slate-400">
+            Latih otak menerangkan objek atau konsep tanpa menyebut namanya. AI akan meneka apa yang anda maksudkan!
+          </p>
+        </div>
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-3 text-xs">
+          <div class="flex justify-between items-center">
+            <span class="text-slate-400 text-[11px] uppercase tracking-wider font-semibold">Objek Rahsia:</span>
+            <button onclick="generateGymWord()" class="bg-indigo-600 text-white text-[10px] font-bold px-2.5 py-1 rounded transition">Tukar Objek 🎯</button>
+          </div>
+
+          <div class="p-3 bg-indigo-950/40 border border-indigo-500/30 rounded-xl text-center space-y-1">
+            <span class="text-[10px] text-slate-400 uppercase">Jangan sebut perkataan ini:</span>
+            <h3 id="gymWordTitle" class="font-mono text-lg font-black text-amber-300">INVOICE</h3>
+            <p id="gymWordHint" class="text-[10px] text-slate-400">Huraikan dalam 1-2 ayat Bahasa Inggeris mudah.</p>
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-[11px] text-slate-300 block font-semibold">Huraian Spontan Anda:</label>
+            <textarea id="gymUserDesc" rows="2" placeholder="Contoh: It's the paper document we send to clients after the job is done to get payment..." class="w-full bg-[#070C18] border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"></textarea>
+            <button onclick="submitGymGuess()" id="gymGuessBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-xl text-xs transition btn-press">
+              Hantar Huraian & Minta AI Teka
+            </button>
+          </div>
+
+          <div id="gymFeedbackBox" class="hidden p-3 bg-[#070C18] border border-slate-700 rounded-xl space-y-1.5 text-xs">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==================== BOTTOM NAVIGATION BAR ==================== -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-[#0B132B]/95 backdrop-blur-xl border-t border-slate-800 px-2 py-2 safe-bottom">
+    <div class="max-w-2xl mx-auto flex items-center justify-around text-[10px]">
+      
+      <!-- Nav 1: Modul / Chapters -->
+      <button onclick="switchAppTab('dashboard')" id="nav-btn-dashboard" class="nav-item active flex flex-col items-center gap-1 text-blue-400 font-bold transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+        <span>Modul</span>
+      </button>
+
+      <!-- Nav 2: AI Coach -->
+      <button onclick="switchAppTab('coach')" id="nav-btn-coach" class="nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+        <span>AI Coach</span>
+      </button>
+
+      <!-- Nav 3: Quick Script -->
+      <button onclick="switchAppTab('cheatsheet')" id="nav-btn-cheatsheet" class="nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <span>Skrip Pantas</span>
+      </button>
+
+      <!-- Nav 4: 30-Day Tracker -->
+      <button onclick="switchAppTab('tracker')" id="nav-btn-tracker" class="nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+        <span>Tracker</span>
+      </button>
+
+      <!-- Nav 5: AI Tools -->
+      <button onclick="switchAppTab('tools')" id="nav-btn-tools" class="nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+        <span>AI Tools</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ==================== CHAPTER DRAWER OVERLAY ==================== -->
+  <div id="chapterDrawer" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex justify-start">
+    <div class="w-4/5 max-w-xs bg-[#0B132B] h-full p-4 flex flex-col justify-between border-r border-slate-800 space-y-4">
+      <div class="space-y-4 overflow-y-auto">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-blue-400 font-bold">📖</span>
+            <h3 class="font-heading font-extrabold text-sm text-white">Senarai Bab</h3>
+          </div>
+          <button onclick="toggleChapterDrawer(false)" class="text-slate-400 hover:text-white p-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <nav class="space-y-1 text-xs">
+          <button onclick="openChapter('intro'); toggleChapterDrawer(false)" class="w-full text-left p-2.5 rounded-lg hover:bg-slate-800 text-slate-200 font-medium flex items-center justify-between">
+            <span>00. Kit Survival Sebenar</span>
+            <span id="drawer-check-intro" class="hidden text-emerald-400">✓</span>
+          </button>
+          <button onclick="openChapter('bab1'); toggleChapterDrawer(false)" class="w-full text-left p-2.5 rounded-lg hover:bg-slate-800 text-slate-200 font-medium flex items-center justify-between">
+            <span>01. Bedah Siasat Otak Jem</span>
+            <span id="drawer-check-bab1" class="hidden text-emerald-400">✓</span>
+          </button>
+          <button onclick="openChapter('bab2'); toggleChapterDrawer(false)" class="w-full text-left p-2.5 rounded-lg hover:bg-slate-800 text-slate-200 font-medium flex items-center justify-between">
+            <span>02. Solo Drills Sampai Lancar</span>
+            <span id="drawer-check-bab2" class="hidden text-emerald-400">✓</span>
+          </button>
+          <button onclick="openChapter('bab3'); toggleChapterDrawer(false)" class="w-full text-left p-2.5 rounded-lg hover:bg-slate-800 text-slate-200 font-medium flex items-center justify-between">
+            <span>03. AI Sparring Partner 24 Jam</span>
+            <span id="drawer-check-bab3" class="hidden text-emerald-400">✓</span>
+          </button>
+          <button onclick="openChapter('bab4'); toggleChapterDrawer(false)" class="w-full text-left p-2.5 rounded-lg hover:bg-slate-800 text-slate-200 font-medium flex items-center justify-between">
+            <span>04. Skrip Bila Otak Blank</span>
+            <span id="drawer-check-bab4" class="hidden text-emerald-400">✓</span>
+          </button>
+          <button onclick="openChapter('bab5'); toggleChapterDrawer(false)" class="w-full text-left p-2.5 rounded-lg hover:bg-slate-800 text-slate-200 font-medium flex items-center justify-between">
+            <span>05. Workplace Survival</span>
+            <span id="drawer-check-bab5" class="hidden text-emerald-400">✓</span>
+          </button>
+          <button onclick="openChapter('resources'); toggleChapterDrawer(false)" class="w-full text-left p-2.5 rounded-lg hover:bg-slate-800 text-slate-200 font-medium flex items-center justify-between">
+            <span>06. Sumber Latihan Percuma</span>
+            <span id="drawer-check-resources" class="hidden text-emerald-400">✓</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="border-t border-slate-800 pt-3 text-[10px] text-slate-400 space-y-1">
+        <p><strong>Workplace Speaking Hacks</strong></p>
+        <p>Edisi PWA App • Terbitan Digital</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PWA INSTALL MODAL ==================== -->
+  <div id="pwaModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-5 text-white shadow-2xl space-y-3.5 text-xs">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span class="p-2 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30">📲</span>
+          <h3 class="font-heading font-bold text-sm text-slate-100">Pasang di Skrin Telefon</h3>
+        </div>
+        <button onclick="togglePWAInstallModal(false)" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+
+      <p class="text-slate-300 leading-relaxed text-[11px]">
+        Anda boleh pasang laman ini sebagai aplikasi penuh (PWA) di skrin utama tanpa melalui Google Play atau App Store:
+      </p>
+
+      <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2 text-[11px] text-slate-300">
+        <div>
+          <strong class="text-blue-300 block mb-0.5">Untuk Pengguna iPhone (Safari):</strong>
+          <p>1. Tekan butang <strong>Share</strong> (ikon kotak dengan anak panah ke atas) di bahagian bawah pelayar.</p>
+          <p>2. Skrol ke bawah dan pilih <strong>"Add to Home Screen"</strong>.</p>
+        </div>
+        <div class="border-t border-slate-800 pt-1.5">
+          <strong class="text-emerald-300 block mb-0.5">Untuk Pengguna Android (Chrome):</strong>
+          <p>1. Tekan menu 3 titik di sudut kanan atas pelayar.</p>
+          <p>2. Pilih <strong>"Install app"</strong> atau <strong>"Add to Home screen"</strong>.</p>
+        </div>
+      </div>
+
+      <button onclick="togglePWAInstallModal(false)" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-xl text-xs transition">
+        Faham, Tutup
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Bar -->
+  <div id="toast" class="hidden fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-2xl transition animate-bounce">
+    Tindakan berjaya!
+  </div>
+
+  <script>
+    /* ==================== CHAPTER CONTENT REPOSITORY ==================== */
+    // Complete content preserved accurately from the original document
+    const CHAPTERS_DATA = {
+      intro: {
+        id: "intro",
+        badge: "Modul 00",
+        title: "Kit Survival Dunia Sebenar",
+        subtitle: "Lupakan silibus peperiksaan, fokus kepada komunikasi tempat kerja.",
+        content: `
+          <div class="space-y-4">
+            <div class="p-3 bg-blue-950/40 border border-blue-500/30 rounded-xl space-y-1">
+              <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider">Kata Pengantar Penulis</span>
+              <h3 class="text-sm font-heading font-black text-white">Bukan Buku Teks Sekolah, Ini Kit Tindakan Dunia Sebenar</h3>
+            </div>
+
+            <p>Hai, terima kasih kerana mendapatkan panduan ini.</p>
+            <p>Sebelum anda melangkah lebih jauh, ada satu perkara penting yang kita kena sepakat dari awal: <strong>Panduan ini bukan untuk bantu anda skor A+ dalam kertas peperiksaan MUET atau SPM.</strong></p>
+
+            <p>Di sekolah dulu, kita diajar bahawa salah sebut satu perkataan bermaksud markah dipotong dengan pen merah. Kita diajar menghafal formula <em>past perfect continuous tense</em>, tetapi tidak pernah diajar apa nak buat bila tiba-tiba lidah kelu di depan bos atau pelancong asing.</p>
+
+            <div class="bg-rose-950/30 border border-rose-500/30 p-3 rounded-xl space-y-1.5">
+              <span class="font-bold text-rose-300 text-xs">Hasil Didikan Teori Masa Silam:</span>
+              <ul class="list-disc list-inside text-rose-200 text-xs space-y-0.5">
+                <li>Boleh baca artikel English tanpa masalah.</li>
+                <li>Faham bila orang bercakap atau tengok filem Netflix.</li>
+                <li>Boleh taip emel guna bantuan alatan digital.</li>
+                <li>Tetapi bila kena buka mulut spontan... otak terus jadi <em>blank</em>!</li>
+              </ul>
+            </div>
+
+            <p>Buku ini ditulis dengan gaya santai dan terus kepada penyelesaian praktikal. Matlamat kita cuma satu: <strong>jadikan anda selesa, berani, dan spontan bercakap tanpa rasa takut dihakimi.</strong></p>
+
+            <div class="p-3 bg-amber-950/40 border border-amber-500/30 rounded-xl space-y-1">
+              <strong class="text-amber-300 block text-xs">⚠️ Peraturan Emas: "The 100% Spoken Rule"</strong>
+              <p class="text-[11px] text-amber-200/90 leading-relaxed">
+                Setiap kali anda jumpa contoh ayat atau latihan dalam kotak, anda <strong>WAJIB sebutkannya secara kuat dengan mulut anda minimum 3 kali</strong>. Jika dibaca dalam hati, anda hanya melatih mata, bukan melatih otot percakapan!
+              </p>
+            </div>
+          </div>
+        `
+      },
+      bab1: {
+        id: "bab1",
+        badge: "Modul 01",
+        title: "BAB 1: Bedah Siasat – Kenapa Otak Jem?",
+        subtitle: "Hapuskan Mental Translation Loop & Gunakan Formula K.I.S.S",
+        content: `
+          <div class="space-y-4">
+            <p>Pernah tak anda lalui situasi mendebarkan ini?</p>
+            <p>Rakan sekerja atau klien luar tanya soalan mudah dalam mesyuarat:</p>
+
+            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 font-mono text-emerald-400 text-xs">
+              "Hey, what do you think about the proposed timeline?"
+            </div>
+
+            <p>Dalam kepala, anda tahu jawapannya. Idea berpusing-pusing ligat. Tetapi sebaik sahaja buka mulut, apa yang keluar cuma:</p>
+
+            <div class="bg-rose-950/40 border border-rose-500/30 p-2.5 rounded-lg text-rose-300 italic text-xs">
+              "Err... I think... that timeline... err... can, but..."
+            </div>
+
+            <p>Kemudian lidah anda kaku. Muka rasa panas, jantung berdegup kencang, dan anda cuma tersengih sambil mengangguk perlahan.</p>
+            <p>Puncanya bukan kerana anda kurang kosa kata, tetapi kerana terperangkap dalam <strong>Mental Translation Loop</strong>:</p>
+
+            <div class="space-y-2">
+              <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+                <span class="text-blue-400 font-bold block text-[11px]">Langkah 1: Fikir Bahasa Melayu</span>
+                <p class="text-[11px] text-slate-300">"Projek ni boleh siap tapi perlukan bajet lebih sikit."</p>
+              </div>
+              <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+                <span class="text-blue-400 font-bold block text-[11px]">Langkah 2: Cari Kosa Kata Satu Demi Satu</span>
+                <p class="text-[11px] text-slate-300">Project... can finish... but need... extra budget.</p>
+              </div>
+              <div class="p-2.5 bg-amber-950/30 rounded-lg border border-amber-500/30">
+                <span class="text-amber-400 font-bold block text-[11px]">Langkah 3: Penapis Tatabahasa Masuk Campur</span>
+                <p class="text-[11px] text-amber-200">"Eh kena guna present ke past tense? Budget ke budgeting?"</p>
+              </div>
+              <div class="p-2.5 bg-rose-950/30 rounded-lg border border-rose-500/30">
+                <span class="text-rose-400 font-bold block text-[11px]">Langkah 4: Panik & Sistem Terhenti (Error)</span>
+                <p class="text-[11px] text-rose-200">Terlalu lama berfikir → Otak beku → Anda pilih senyap.</p>
+              </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-3 space-y-2">
+              <h4 class="font-heading font-bold text-sm text-white">Formula K.I.S.S: Keep It Simple, Spoken</h4>
+              <p>Bahasa lisan bersifat modular dan pendek. Pecahkan ayat rumit kepada 2-3 ayat ringkas:</p>
+
+              <div class="p-3 bg-emerald-950/30 border border-emerald-500/30 rounded-xl space-y-1.5">
+                <span class="font-bold text-emerald-400 text-xs">Contoh K.I.S.S (Spontan & Yakin):</span>
+                <p class="font-mono text-xs text-white">1. "Quick update on the project."</p>
+                <p class="font-mono text-xs text-white">2. "We are facing some technical issues."</p>
+                <p class="font-mono text-xs text-white">3. "The submission might be slightly delayed."</p>
+                <p class="text-[10px] text-emerald-300/80 pt-1">3 ayat pendek. Mudah disebut, tatabahasa tepat, mesej sampai tanpa rasa gugup.</p>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      bab2: {
+        id: "bab2",
+        badge: "Modul 02",
+        title: "BAB 2: Solo Drills – Praktis Sendiri Sampai Lancar",
+        subtitle: "Latih Lidah di Dalam Bilik Tanpa Rasa Malu",
+        content: `
+          <div class="space-y-4">
+            <p>Sebelum bercakap dengan manusia sebenar, anda perlu membina kekuatan fizikal pada otot sebutan (lidah, bibir, dan rahang).</p>
+
+            <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <strong class="text-blue-400 text-xs block">1. Teknik Shadowing 5 Minit:</strong>
+              <p class="text-[11px] leading-relaxed">
+                Mendengar rakaman penutur asli dan mengulangi sebutannya serentak dengan kelewatan cuma 0.5 saat. Ini memotong proses analitikal dan melatih intonasi semula jadi.
+              </p>
+            </div>
+
+            <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <strong class="text-emerald-400 text-xs block">2. Self-Talk & Narrating Your Day:</strong>
+              <p class="text-[11px] leading-relaxed">
+                Jadilah penyampai radio kepada rutin anda sendiri semasa membuat kopi, memandu, atau bersiap:
+              </p>
+              <p class="font-mono text-[11px] text-slate-300 italic bg-[#070C18] p-2 rounded">
+                "Alright, let's make some coffee. Where did I leave my mug? Ah, there it is."
+              </p>
+            </div>
+
+            <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <strong class="text-amber-400 text-xs block">3. The 60-Second Audio Recording Audit:</strong>
+              <p class="text-[11px] leading-relaxed">
+                Setiap malam, rakam memo suara 60 saat di telefon tentang hari kerja anda. Dengar semula untuk semak: adakah anda senyap melebihi 3 saat? Berapa kerap sebut "errr"?
+              </p>
+            </div>
+
+            <div class="border-t border-slate-800 pt-3 space-y-2">
+              <h4 class="font-heading font-bold text-sm text-white">Senaman Mulut & Sebutan Bunyi Kritikal:</h4>
+              <ul class="text-[11px] space-y-1.5 list-disc list-inside text-slate-300">
+                <li><strong>Huruf V vs F:</strong> V perlukan getaran pita suara (Very, Value, Provide).</li>
+                <li><strong>Bunyi TH (/θ/ dan /ð/):</strong> Letakkan sedikit hujung lidah di antara gigi atas dan bawah ("I think three things").</li>
+                <li><strong>Ending Sounds:</strong> Hidupkan bunyi past tense (-ed) dan jamak (-s) agar ayat tidak berbunyi lewah.</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      bab3: {
+        id: "bab3",
+        badge: "Modul 03",
+        title: "BAB 3: AI Sebagai Sparring Partner 24 Jam",
+        subtitle: "Latihan Suara Tanpa Rasa Takut Dihakimi",
+        content: `
+          <div class="space-y-4">
+            <p>Kelebihan terbesar teknologi hari ini: anda memiliki penutur asli bertaraf dunia dalam poket anda yang <strong>sifar emosi, tidak menghakimi kesilapan tatabahasa anda, dan bersedia 24 jam</strong>.</p>
+
+            <div class="p-3 bg-blue-950/30 border border-blue-500/30 rounded-xl space-y-1.5">
+              <strong class="text-blue-300 text-xs block">Prompt Roleplay 1: Kafe & Barista (Small Talk)</strong>
+              <div class="bg-slate-950 p-2.5 rounded font-mono text-[10.5px] text-slate-200">
+                "Let's do a speaking roleplay in English. You are a friendly barista at a busy coffee shop in KL. I am a customer ordering a drink. Keep responses short (1-2 sentences) and ask follow-up questions."
+              </div>
+            </div>
+
+            <div class="p-3 bg-emerald-950/30 border border-emerald-500/30 rounded-xl space-y-1.5">
+              <strong class="text-emerald-300 text-xs block">Prompt Roleplay 2: Temu Duga Eksekutif (Formula P.E.E.L)</strong>
+              <div class="bg-slate-950 p-2.5 rounded font-mono text-[10.5px] text-slate-200">
+                "Act as an HR Manager interviewing me for an executive role. Ask me one interview question at a time in English. Wait for my response. If I pause too long, prompt me to continue."
+              </div>
+              <p class="text-[10px] text-emerald-400">Formula P.E.E.L: Point → Example → Explanation → Link.</p>
+            </div>
+
+            <div class="p-3 bg-purple-950/30 border border-purple-500/30 rounded-xl space-y-1.5">
+              <strong class="text-purple-300 text-xs block">Formula Shadow Tutor (Feedback Loop)</strong>
+              <p class="text-[11px] text-slate-300">
+                Jangan biar AI mencelah setiap ayat. Beritahu AI: <em>"Do not interrupt me during practice. When I say 'End of Practice', give me 3 grammar mistakes and 2 corporate vocabulary words."</em>
+              </p>
+            </div>
+
+            <div class="pt-1">
+              <button onclick="switchAppTab('coach')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 btn-press">
+                <span>🎙️</span> Uji Roleplay Sekarang di Tab AI Coach
+              </button>
+            </div>
+          </div>
+        `
+      },
+      bab4: {
+        id: "bab4",
+        badge: "Modul 04",
+        title: "BAB 4: Skrip Penyelamat Bila Otak Blank",
+        subtitle: "Seni Beli Masa, Circumlocution & Frasa Bridge",
+        content: `
+          <div class="space-y-4">
+            <p>Native speakers juga memerlukan 2-3 saat untuk berfikir. Tetapi mereka tidak menyebut <em>"err... umm..."</em>; mereka menggunakan <strong>corporate filler phrases</strong>:</p>
+
+            <div class="space-y-2">
+              <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                <span class="text-blue-400 font-bold block text-xs">1. Menghargai Soalan (Beli Masa 2-3 Saat):</span>
+                <p class="italic text-white text-[11px] mt-0.5">"That's an interesting question. Let me structure my thoughts for a second."</p>
+              </div>
+              <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                <span class="text-blue-400 font-bold block text-xs">2. Menyelaraskan Sudut Pandang:</span>
+                <p class="italic text-white text-[11px] mt-0.5">"There are a couple of ways to look at this. But primarily..."</p>
+              </div>
+            </div>
+
+            <div class="p-3 bg-emerald-950/30 border border-emerald-500/30 rounded-xl space-y-1.5">
+              <strong class="text-emerald-300 text-xs block">Teknik Circumlocution (Bila Terlupa Satu Perkataan)</strong>
+              <p class="text-[11px] text-slate-300">
+                Terangkan fungsi, rupa, atau hubungan objek tersebut tanpa panik:
+              </p>
+              <p class="text-[11px] text-emerald-200 font-mono italic">
+                Terlupa "Invoice" → "The payment document that we send to the client after the project is done."
+              </p>
+            </div>
+
+            <div class="border-t border-slate-800 pt-3 space-y-2">
+              <h4 class="font-heading font-bold text-sm text-white">Self-Correction On The Fly:</h4>
+              <p class="text-[11px] text-slate-300">
+                Jangan sesekali sebut <em>"Sorry for my bad English"</em>! Gunakan kata kunci peralihan yang elegan: <strong>"Or rather..."</strong> atau <strong>"What I meant to say was..."</strong>.
+              </p>
+            </div>
+
+            <div class="pt-1">
+              <button onclick="switchAppTab('cheatsheet')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 btn-press">
+                <span>⚡</span> Buka Direktori Skrip Pantas & 20 Frasa Bridge
+              </button>
+            </div>
+          </div>
+        `
+      },
+      bab5: {
+        id: "bab5",
+        badge: "Modul 05",
+        title: "BAB 5: Workplace Survival",
+        subtitle: "Mesyuarat, Lif, Pantri, & Standup 60 Saat",
+        content: `
+          <div class="space-y-4">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <strong class="text-blue-400 text-xs block">1. Sembang Santai di Lif & Pantri (Teknik Ping-Pong):</strong>
+              <p class="text-[11px] text-slate-300">
+                Elakkan jawapan mati satu patah perkataan seperti <em>"Good"</em>. Jawab dan lontarkan bola semula:
+              </p>
+              <p class="italic text-emerald-300 text-[11px] font-mono">
+                "Pretty relaxing, mostly spent time with family. How about yours? Did you catch that movie?"
+              </p>
+            </div>
+
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <strong class="text-amber-400 text-xs block">2. Menyampuk Mesyuarat Secara Tertib (Interrupting Politely):</strong>
+              <p class="italic text-slate-200 text-[11px] font-mono">
+                "Sorry to jump in, but could I quickly add a data point to what Sarah just mentioned?"
+              </p>
+            </div>
+
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+              <strong class="text-rose-400 text-xs block">3. Menolak Arahan & Diplomasi (Validate → Pivot → Concern):</strong>
+              <p class="italic text-slate-200 text-[11px] font-mono">
+                "I see the merit in this approach, and it's definitely a solid idea. However, looking at our current team bandwidth, my concern is whether we can hit this deadline without compromising quality."
+              </p>
+            </div>
+
+            <div class="p-3 bg-emerald-950/30 border border-emerald-500/30 rounded-xl space-y-1.5">
+              <strong class="text-emerald-300 text-xs block">4. Membentangkan Status Kerja 60 Saat (Formula 3P):</strong>
+              <ul class="text-[11px] space-y-1 text-slate-300">
+                <li><strong>Past:</strong> "Yesterday, I completed the audit data consolidation."</li>
+                <li><strong>Present:</strong> "Today, my main priority is finalizing the executive deck."</li>
+                <li><strong>Roadblock:</strong> "My only blocker is getting clearance from IT."</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      resources: {
+        id: "resources",
+        badge: "Modul 06",
+        title: "Sumber Latihan Percuma & Penutup",
+        subtitle: "Saluran YouTube, Podcast, & Kata Akhir Penulis",
+        content: `
+          <div class="space-y-4">
+            <h4 class="font-heading font-bold text-sm text-white">Sumber Latihan Cadangan:</h4>
+            
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                <strong class="text-blue-400 block mb-0.5">1. YouTube untuk Shadowing:</strong>
+                <p>• <strong>TED-Ed:</strong> Animasi pendek 3-5 minit dengan kosa kata jelas.</p>
+                <p>• <strong>BBC Learning English:</strong> Siri "English at Work" untuk drama situasi pejabat.</p>
+              </div>
+
+              <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                <strong class="text-emerald-400 block mb-0.5">2. Podcast Semasa Memandu:</strong>
+                <p>• <strong>BBC 6 Minute English:</strong> Format santai ulas frasa perbualan.</p>
+                <p>• <strong>Business English Pod:</strong> Komunikasi kepimpinan & pembentangan.</p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-gradient-to-br from-blue-950 to-slate-900 border border-blue-500/30 rounded-2xl text-center space-y-2">
+              <h3 class="font-heading font-bold text-base text-white">Suara Anda Berhak Untuk Didengari.</h3>
+              <p class="text-xs text-slate-300 italic">
+                "Perjalanan anda bermula pada perbualan seterusnya. Tarik nafas, tatap mata mereka, dan buka mulut anda!"
+              </p>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    const CHAPTER_KEYS = ['intro', 'bab1', 'bab2', 'bab3', 'bab4', 'bab5', 'resources'];
+    let currentChapterIndex = 0;
+    let completedChapters = new Set();
+
+    /* ==================== CHEAT SHEET DATABASE ==================== */
+    const CHEATSHEET_DATA = [
+      { cat: 'filler', title: 'Menghargai Soalan', en: "That's an interesting question. Let me structure my thoughts for a second.", ms: "Soalan menarik. Beri saya sesaat untuk susun poin." },
+      { cat: 'filler', title: 'Sudut Pandang Utama', en: "There are a couple of ways to look at this. But primarily...", ms: "Ada beberapa sudut pandang. Namun yang paling utama..." },
+      { cat: 'filler', title: 'Pengesahan Soalan', en: "Just to make sure we're on the same page, you are asking about the timeline, right?", ms: "Hanya untuk pastikan kita selari, anda bertanya tentang jadual, betul?" },
+      { cat: 'replace', title: 'Bila Tak Tahu Jawapan', en: "I will need to verify that with the team and update you by 3 PM.", ms: "Ganti: 'I don't know'." },
+      { cat: 'replace', title: 'Suruh Orang Tunggu', en: "Give me just a brief moment, please.", ms: "Ganti: 'Wait first / Wait a minute'." },
+      { cat: 'replace', title: 'Bantah Secara Diplomasi', en: "I see where you're coming from, but I look at it slightly differently.", ms: "Ganti: 'You are wrong / I don't agree'." },
+      { cat: 'replace', title: 'Tolak Tugas Kerana Sibuk', en: "My current bandwidth is fully committed to the audit report this week.", ms: "Ganti: 'I am busy cannot do'." },
+      { cat: 'replace', title: 'Tamat Bercakap', en: "That covers my main updates. I'll pass the floor back to Sarah.", ms: "Ganti: 'That's all, finish'." },
+      { cat: 'bridge', title: 'Tambah Poin', en: "On top of that, half the batch was delivered late.", ms: "Sebagai tambahan... (Ganti 'And... and...')" },
+      { cat: 'bridge', title: 'Pandangan Berlawanan', en: "Having said that, the team is ready to push for it.", ms: "Walau bagaimanapun... (Ganti 'But...')" },
+      { cat: 'bridge', title: 'Memberi Contoh', en: "Case in point, marketing wasn't informed about the new launch.", ms: "Sebagai contoh kukuh... (Ganti 'For example')" },
+      { cat: 'bridge', title: 'Rumuskan Tindakan', en: "The bottom line is, we need director approval before moving forward.", ms: "Kesimpulan dasarnya ialah..." },
+      { cat: 'circum', title: 'Invoice / Resit', en: "The payment document that we send to clients after the project is done.", ms: "Huraian pantas bila terlupa perkataan." },
+      { cat: 'circum', title: 'Bottleneck (Kelewatan)', en: "The main delay in the process that is slowing down the entire project.", ms: "Huraian pantas bila terlupa perkataan." }
+    ];
+
+    /* ==================== TRACKER DATABASE ==================== */
+    const TRACKER_TASKS = [
+      { day: 1, text: "Latih sebut 20 perkataan bermula huruf V dan bunyi TH di hadapan cermin (10 minit)." },
+      { day: 2, text: "Shadowing 1 klip video pendek YouTube 30 saat sebanyak 5 kali sehingga intonasi selari." },
+      { day: 3, text: "Monolog lisan 5 minit semasa menyediakan kopi atau sarapan pagi." },
+      { day: 4, text: "Rakam memo suara 60 saat: 'Who am I and what is my biggest challenge at work?'" },
+      { day: 5, text: "Baca berita pendek dan tekankan sebutan bunyi hujung (-ed dan -s)." },
+      { day: 6, text: "Shadowing temu bual santai selebriti/usahawan untuk meniru nada bersahaja." },
+      { day: 7, text: "Monolog memandu/pengangkutan 5 minit mengulas perkara berlaku minggu ini." },
+      { day: 8, text: "Terangkan 1 masalah sistem pejabat dalam 3 ayat K.I.S.S." },
+      { day: 9, text: "Rakam memo suara 90 saat ulas drama atau filem kegemaran." },
+      { day: 10, text: "Shadowing pembentangan pelancaran produk Apple atau Google." },
+      { day: 11, text: "Monolog perancangan mingguan sambil melihat jadual kerja." },
+      { day: 12, text: "Simulasi memesan kopi di kaunter dengan perincian suhu dan jenis susu." },
+      { day: 13, text: "Rakam memo suara 2 minit ulas 1 isu tular: Fakta → Pandangan." },
+      { day: 14, text: "Bandingkan rakaman suara Hari 1 vs Hari 13. Catat 2 peningkatan kelancaran!" },
+      { day: 15, text: "Latihan temu duga bersama AI Coach menggunakan formula P.E.E.L." },
+      { day: 16, text: "Praktis menjawab soalan: 'Tell me about a time you handled a difficult client.'" },
+      { day: 17, text: "Uji simulasi desakan pengurus dalam mesyuarat semakan projek bersama AI." },
+      { day: 18, text: "Latih circumlocution: terangkan 5 objek meja kerja tanpa sebut namanya." },
+      { day: 19, text: "Gunakan 3 corporate filler phrases semasa berbual santai." },
+      { day: 20, text: "Gunakan frasa mirroring bila mendengar arahan rakan sekerja." },
+      { day: 21, text: "Sapa rakan di lif/pantri dengan teknik ping-pong (tanya soalan terbuka)." },
+      { day: 22, text: "Gunakan frasa 'Having said that...' semasa melontarkan pandangan berbeza." },
+      { day: 23, text: "Latih formula A.R.T (Answer-Reason-Action) bila disoal status kerja." },
+      { day: 24, text: "Praktis pembentangan 60-second standup 3P (Past, Present, Roadblock)." },
+      { day: 25, text: "Minta AI menganalisis pembetulan sebutan lisan (Shadow Tutor audit)." },
+      { day: 26, text: "Ulang sebut 10 padanan 'Jangan Cakap X, Ganti Y' dengan suara lantang." },
+      { day: 27, text: "Mencelah secara tertib dalam 1 sesi mesyuarat menggunakan skrip sopan." },
+      { day: 28, text: "Gunakan kata kunci peralihan 'Or rather...' bila tersasul bercakap." },
+      { day: 29, text: "Lakukan sesi roleplay 10 minit penuh bersama AI tanpa henti." },
+      { day: 30, text: "Audit Akhir: Rakam video/audio ulasan diri 2 minit & raikan keyakinan baharu anda!" }
+    ];
+
+    let trackerCompletedDays = new Set();
+
+    /* ==================== NAVIGATION LOGIC ==================== */
+    function switchAppTab(tabId) {
+      const views = ['dashboard', 'reader', 'coach', 'cheatsheet', 'tracker', 'tools'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) el.classList.add('hidden');
+      });
+
+      const navBtns = ['dashboard', 'coach', 'cheatsheet', 'tracker', 'tools'];
+      navBtns.forEach(btn => {
+        const el = document.getElementById(`nav-btn-${btn}`);
+        if (el) {
+          if (btn === tabId || (tabId === 'reader' && btn === 'dashboard')) {
+            el.className = "nav-item active flex flex-col items-center gap-1 text-blue-400 font-bold transition";
+          } else {
+            el.className = "nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition";
+          }
+        }
+      });
+
+      const targetView = document.getElementById(`view-${tabId}`);
+      if (targetView) targetView.classList.remove('hidden');
+
+      const topTitle = document.getElementById('topChapterTitle');
+      if (tabId === 'dashboard') topTitle.innerText = "Menu Utama • Semua Bab";
+      else if (tabId === 'coach') topTitle.innerText = "AI Sparring Coach";
+      else if (tabId === 'cheatsheet') topTitle.innerText = "Quick Script Cheat Sheet";
+      else if (tabId === 'tracker') topTitle.innerText = "30-Day Habit Tracker";
+      else if (tabId === 'tools') topTitle.innerText = "AI Rephraser & Gym";
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openChapter(chapterKey) {
+      const chapter = CHAPTERS_DATA[chapterKey];
+      if (!chapter) return;
+
+      currentChapterIndex = CHAPTER_KEYS.indexOf(chapterKey);
+      
+      const badge = document.getElementById('readerChapterBadge');
+      const contentArea = document.getElementById('readerContentArea');
+      const topTitle = document.getElementById('topChapterTitle');
+
+      badge.innerText = chapter.badge;
+      topTitle.innerText = chapter.title;
+
+      contentArea.innerHTML = `
+        <div class="border-b border-slate-800 pb-3 space-y-1">
+          <span class="text-[10px] font-mono text-blue-400 font-bold uppercase tracking-wider">${chapter.badge}</span>
+          <h2 class="text-base sm:text-lg font-heading font-black text-white leading-tight">${chapter.title}</h2>
+          <p class="text-xs text-slate-400">${chapter.subtitle}</p>
+        </div>
+        ${chapter.content}
+      `;
+
+      // Update Prev / Next Buttons
+      document.getElementById('readerPrevBtn').disabled = currentChapterIndex === 0;
+      document.getElementById('readerNextBtn').disabled = currentChapterIndex === CHAPTER_KEYS.length - 1;
+
+      // Update Mark Done status button text
+      updateDoneButtonUI();
+
+      switchAppTab('reader');
+    }
+
+    function navigateAdjacentChapter(direction) {
+      const newIndex = currentChapterIndex + direction;
+      if (newIndex >= 0 && newIndex < CHAPTER_KEYS.length) {
+        openChapter(CHAPTER_KEYS[newIndex]);
+      }
+    }
+
+    function backToDashboard() {
+      switchAppTab('dashboard');
+    }
+
+    function toggleChapterDrawer(show) {
+      const drawer = document.getElementById('chapterDrawer');
+      if (show) drawer.classList.remove('hidden');
+      else drawer.classList.add('hidden');
+    }
+
+    function togglePWAInstallModal(show) {
+      const modal = document.getElementById('pwaModal');
+      if (show) modal.classList.remove('hidden');
+      else modal.classList.add('hidden');
+    }
+
+    function toggleChapterDone() {
+      const currentKey = CHAPTER_KEYS[currentChapterIndex];
+      if (completedChapters.has(currentKey)) {
+        completedChapters.delete(currentKey);
+        showToast("Tanda selesai dibatalkan.");
+      } else {
+        completedChapters.add(currentKey);
+        showToast("Tahniah! Bab ditandakan selesai.");
+      }
+      updateDoneButtonUI();
+      updateDashboardProgressUI();
+    }
+
+    function updateDoneButtonUI() {
+      const currentKey = CHAPTER_KEYS[currentChapterIndex];
+      const btn = document.getElementById('readerMarkDoneBtn');
+      if (completedChapters.has(currentKey)) {
+        btn.innerHTML = `<span>✓✓</span> Selesai Dibaca`;
+        btn.className = "text-xs font-bold px-3 py-2 rounded-lg bg-emerald-600 text-white transition flex items-center gap-1.5 shadow-md shadow-emerald-600/30";
+      } else {
+        btn.innerHTML = `<span>✓</span> Tanda Selesai`;
+        btn.className = "text-xs font-bold px-3 py-2 rounded-lg bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-600/50 transition flex items-center gap-1.5";
+      }
+    }
+
+    function updateDashboardProgressUI() {
+      const total = CHAPTER_KEYS.length;
+      const count = completedChapters.size;
+      const pct = Math.round((count / total) * 100);
+
+      document.getElementById('overallProgressText').innerText = `${pct}% Selesai (${count}/${total} Bab)`;
+      document.getElementById('overallProgressBar').style.width = `${pct}%`;
+
+      // Update badges
+      CHAPTER_KEYS.forEach(key => {
+        const badge = document.getElementById(`badge-${key}`);
+        const drawerCheck = document.getElementById(`drawer-check-${key}`);
+        if (completedChapters.has(key)) {
+          if (badge) badge.classList.remove('hidden');
+          if (drawerCheck) drawerCheck.classList.remove('hidden');
+        } else {
+          if (badge) badge.classList.add('hidden');
+          if (drawerCheck) drawerCheck.classList.add('hidden');
+        }
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 2500);
+    }
+
+    /* ==================== CHEAT SHEET SEARCH & RENDER ==================== */
+    let currentFilterCat = 'all';
+
+    function renderCheatSheet() {
+      const container = document.getElementById('scriptListContainer');
+      const search = document.getElementById('scriptSearchInput').value.toLowerCase().trim();
+
+      const filtered = CHEATSHEET_DATA.filter(item => {
+        const matchCat = (currentFilterCat === 'all' || item.cat === currentFilterCat);
+        const matchSearch = (!search || item.title.toLowerCase().includes(search) || item.en.toLowerCase().includes(search) || item.ms.toLowerCase().includes(search));
+        return matchCat && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<p class="text-center text-slate-500 py-6 text-xs">Tiada frasa yang sepadan dengan carian.</p>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <div class="p-3 bg-slate-900 border border-slate-800 rounded-xl space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400">${item.title}</span>
+            <button onclick="playVoiceAudio('${item.en.replace(/'/g, "\\'")}')" class="text-[10px] text-emerald-400 hover:underline flex items-center gap-1">
+              <span>🔊</span> Dengar
+            </button>
+          </div>
+          <p class="font-mono text-xs font-semibold text-white">${item.en}</p>
+          <p class="text-[10px] text-slate-400">${item.ms}</p>
+        </div>
+      `).join('');
+    }
+
+    function filterScriptCategory(cat) {
+      currentFilterCat = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.className = "cat-btn py-1 px-3 rounded-lg bg-slate-800 text-slate-300 font-semibold whitespace-nowrap text-xs";
+      });
+      event.target.className = "cat-btn active py-1 px-3 rounded-lg bg-blue-600 text-white font-semibold whitespace-nowrap text-xs";
+      renderCheatSheet();
+    }
+
+    function filterScripts(query) {
+      renderCheatSheet();
+    }
+
+    /* ==================== 30-DAY TRACKER LOGIC ==================== */
+    function renderTrackerDays() {
+      const container = document.getElementById('trackerDaysList');
+      container.innerHTML = TRACKER_TASKS.map(t => {
+        const isDone = trackerCompletedDays.has(t.day);
+        return `
+          <div onclick="toggleTrackerDay(${t.day})" class="p-3 rounded-xl border ${isDone ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-100' : 'bg-slate-900/80 border-slate-800 text-slate-300'} flex items-start gap-3 cursor-pointer btn-press transition">
+            <input type="checkbox" ${isDone ? 'checked' : ''} class="mt-0.5 w-4 h-4 rounded text-emerald-600 bg-slate-950 border-slate-700 pointer-events-none">
+            <div class="flex-1 space-y-0.5">
+              <span class="font-bold text-[10px] font-mono text-emerald-400 uppercase">Hari ${String(t.day).padStart(2, '0')}</span>
+              <p class="text-xs leading-snug">${t.text}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const count = trackerCompletedDays.size;
+      const total = TRACKER_TASKS.length;
+      document.getElementById('trackerProgressText').innerText = `${count}/${total}`;
+      document.getElementById('trackerProgressBar').style.width = `${Math.round((count / total) * 100)}%`;
+    }
+
+    function toggleTrackerDay(day) {
+      if (trackerCompletedDays.has(day)) {
+        trackerCompletedDays.delete(day);
+      } else {
+        trackerCompletedDays.add(day);
+      }
+      renderTrackerDays();
+    }
+
+    /* ==================== GEMINI API INTEGRATION ==================== */
+    const apiKey = ""; // Runtime automatically provides key
+
+    async function callGemini(apiUrl, payload, maxRetries = 3) {
+      let delay = 1000;
+      for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+          const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (res.ok) return await res.json();
+          if (res.status === 429 || res.status >= 500) {
+            await new Promise(r => setTimeout(r, delay));
+            delay *= 2;
+            continue;
+          }
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error?.message || `HTTP ${res.status}`);
+        } catch (e) {
+          if (attempt === maxRetries - 1) throw e;
+          await new Promise(r => setTimeout(r, delay));
+          delay *= 2;
+        }
+      }
+    }
+
+    // Audio Playback with Web Speech API fallback
+    async function playVoiceAudio(text) {
+      try {
+        const ttsUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{ parts: [{ text }] }],
+          generationConfig: {
+            responseModalities: ["AUDIO"],
+            speechConfig: {
+              voiceConfig: { prebuiltVoiceConfig: { voiceName: "Puck" } }
+            }
+          }
+        };
+        const res = await callGemini(ttsUrl, payload);
+        const part = res?.candidates?.[0]?.content?.parts?.[0];
+        const audioData = part?.inlineData?.data;
+        const mimeType = part?.inlineData?.mimeType;
+
+        if (audioData && mimeType && mimeType.startsWith("audio/")) {
+          const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+          const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 24000;
+          const binaryString = window.atob(audioData);
+          const bytes = new Uint8Array(binaryString.length);
+          for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
+          const pcm16 = new Int16Array(bytes.buffer);
+          
+          // WAV Header construction
+          const wavBuffer = new ArrayBuffer(44 + pcm16.length * 2);
+          const view = new DataView(wavBuffer);
+          const writeStr = (offset, str) => { for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i)); };
+          writeStr(0, 'RIFF'); view.setUint32(4, 36 + pcm16.length * 2, true); writeStr(8, 'WAVE');
+          writeStr(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+          view.setUint16(22, 1, true); view.setUint32(24, sampleRate, true);
+          view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true);
+          view.setUint16(34, 16, true); writeStr(36, 'data'); view.setUint32(40, pcm16.length * 2, true);
+          let offset = 44;
+          for (let i = 0; i < pcm16.length; i++) { view.setInt16(offset, pcm16[i], true); offset += 2; }
+          const blob = new Blob([view], { type: 'audio/wav' });
+          const audio = new Audio(URL.createObjectURL(blob));
+          audio.play();
+          return;
+        }
+      } catch (err) {
+        // Fallback to Web Speech API smoothly
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = 'en-US';
+        utt.rate = 0.95;
+        window.speechSynthesis.speak(utt);
+      }
+    }
+
+    /* ==================== ROLEPLAY STATE & LOGIC ==================== */
+    const SCENARIOS = {
+      cafe: {
+        system: `You are a friendly barista at a coffee shop in KL. The user is practicing spoken English. Respond in strictly ONE or TWO short sentences. Ask a simple follow-up question. Do not give lectures.`,
+        initial: "Hi there! Welcome to The Roast. What can I get started for you today?"
+      },
+      interview: {
+        system: `You are an HR Manager interviewing the user. Ask ONE realistic interview question at a time. Keep reactions brief. Encourage them to structure answers.`,
+        initial: "Good morning. Thank you for joining us today. Could you start by introducing yourself and sharing your greatest professional strength?"
+      },
+      manager: {
+        system: `You are a project manager asking for a status update. Be concise, direct, and ask about roadblocks or deadlines in 1-2 sentences.`,
+        initial: "Morning! Can you give me a quick status update on the quarterly report? Are we still on track for Friday?"
+      },
+      pantry: {
+        system: `You are a colleague bumping into the user in the office pantry. Make natural small talk (coffee, weather, weekend). Respond in 1-2 sentences with an open question.`,
+        initial: "Hey there! Smells like fresh coffee. How has your week been so far?"
+      }
+    };
+
+    let currentScenario = 'cafe';
+    let roleplayHistory = [];
+
+    function changeScenario(key) {
+      currentScenario = key;
+      resetRoleplayChat();
+    }
+
+    function resetRoleplayChat() {
+      roleplayHistory = [];
+      const chatBox = document.getElementById('roleplayChatBox');
+      const feedback = document.getElementById('feedbackContainer');
+      feedback.classList.add('hidden');
+      chatBox.innerHTML = '';
+
+      const initialText = SCENARIOS[currentScenario].initial;
+      roleplayHistory.push({ role: "model", parts: [{ text: initialText }] });
+      appendMessage("model", initialText);
+    }
+
+    function appendMessage(role, text) {
+      const chatBox = document.getElementById('roleplayChatBox');
+      const isAI = role === 'model';
+      const div = document.createElement('div');
+      div.className = isAI ? 'flex gap-2 items-start' : 'flex gap-2 items-start justify-end';
+
+      const esc = text.replace(/"/g, '&quot;').replace(/'/g, "\\'");
+      div.innerHTML = `
+        ${isAI ? '<div class="w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">AI</div>' : ''}
+        <div class="max-w-[85%] ${isAI ? 'bg-slate-900 border border-slate-800 text-slate-200' : 'bg-emerald-600 text-white'} rounded-2xl px-3 py-2 text-xs shadow-sm">
+          <p class="leading-relaxed">${text}</p>
+          ${isAI ? `<button onclick="playVoiceAudio('${esc}')" class="mt-1 text-[10px] text-emerald-400 hover:underline flex items-center gap-1">
+            <span>🔊</span> Dengar Sebutan
+          </button>` : ''}
+        </div>
+        ${!isAI ? '<div class="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">Anda</div>' : ''}
+      `;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendRoleplayMessage() {
+      const input = document.getElementById('roleplayUserInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendMessage("user", text);
+      roleplayHistory.push({ role: "user", parts: [{ text }] });
+      input.value = '';
+
+      const btn = document.getElementById('roleplaySendBtn');
+      btn.disabled = true;
+
+      const chatBox = document.getElementById('roleplayChatBox');
+      const typing = document.createElement('div');
+      typing.id = 'aiTyping';
+      typing.className = 'text-xs text-slate-400 italic p-2 bg-slate-900 rounded-xl animate-pulse inline-block';
+      typing.innerText = 'AI sedang berfikir...';
+      chatBox.appendChild(typing);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: roleplayHistory,
+          systemInstruction: { parts: [{ text: SCENARIOS[currentScenario].system }] },
+          generationConfig: { temperature: 0.7, maxOutputTokens: 120 }
+        };
+
+        const res = await callGemini(apiUrl, payload);
+        const reply = res?.candidates?.[0]?.content?.parts?.[0]?.text || "Understood. Let's continue.";
+
+        const tEl = document.getElementById('aiTyping');
+        if (tEl) tEl.remove();
+
+        roleplayHistory.push({ role: "model", parts: [{ text: reply }] });
+        appendMessage("model", reply);
+        playVoiceAudio(reply);
+
+      } catch (e) {
+        const tEl = document.getElementById('aiTyping');
+        if (tEl) tEl.remove();
+        appendMessage("model", "Network glitch. Could you please repeat that?");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function requestFeedbackReport() {
+      const userCount = roleplayHistory.filter(h => h.role === 'user').length;
+      if (userCount === 0) {
+        showToast("Sila bercakap sekurang-kurangnya 1 pusingan dahulu!");
+        return;
+      }
+
+      const fb = document.getElementById('feedbackContainer');
+      fb.classList.remove('hidden');
+      fb.innerHTML = '<p class="text-amber-400 animate-pulse text-xs">Menjana Laporan Audit Shadow Tutor...</p>';
+
+      try {
+        const transcript = roleplayHistory.map(h => `${h.role === 'user' ? 'Student' : 'Partner'}: ${h.parts[0].text}`).join("\n");
+        const prompt = `You are the Shadow Tutor from Workplace Speaking Hacks.
+Analyze this spoken roleplay transcript:
+---
+${transcript}
+---
+Provide a JSON evaluation with:
+1. "mistakes": array of max 3 objects { "wrong": "exact sentence said", "better": "corrected professional version", "note": "brief explanation in Malay" }
+2. "vocab": array of 2 objects { "word": "corporate word", "meaning": "Malay meaning", "example": "sample sentence" }
+3. "encouragement": short 1-sentence motivation in Malay.`;
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: "application/json" }
+        };
+
+        const res = await callGemini(apiUrl, payload);
+        const data = JSON.parse(res?.candidates?.[0]?.content?.parts?.[0]?.text);
+
+        let mistakesHtml = (data.mistakes || []).map(m => `
+          <div class="p-2 bg-slate-950 rounded border border-slate-800 space-y-0.5">
+            <span class="text-rose-400 font-mono text-[11px] block">✗ "${m.wrong}"</span>
+            <span class="text-emerald-400 font-mono text-[11px] font-bold block">✓ "${m.better}"</span>
+            <p class="text-[10px] text-slate-400">${m.note}</p>
+          </div>
+        `).join('') || '<p class="text-slate-400 text-xs">Tiada kesilapan tatabahasa ketara dikesan. Sangat bagus!</p>';
+
+        fb.innerHTML = `
+          <div class="flex justify-between items-center border-b border-amber-500/30 pb-1.5">
+            <strong class="text-amber-400 font-heading text-xs">📋 Audit Lisan Shadow Tutor</strong>
+            <button onclick="document.getElementById('feedbackContainer').classList.add('hidden')" class="text-slate-400 hover:text-white text-[10px]">Tutup</button>
+          </div>
+          <p class="text-slate-300 text-[10px] italic">"${data.encouragement || 'Kerja yang bagus!'}"</p>
+          <div class="space-y-1.5">${mistakesHtml}</div>
+        `;
+      } catch (err) {
+        fb.innerHTML = '<p class="text-rose-400 text-xs">Gagal memproses audit. Sila cuba lagi.</p>';
+      }
+    }
+
+    /* ==================== SPEECH RECOGNITION ==================== */
+    let recognition = null;
+    let isRecording = false;
+
+    function toggleVoiceInput() {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) {
+        showToast("Pelayar ini tidak menyokong Speech Recognition. Sila guna Google Chrome.");
+        return;
+      }
+
+      if (!recognition) {
+        recognition = new SR();
+        recognition.lang = 'en-US';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onstart = () => {
+          isRecording = true;
+          document.getElementById('recordingBadge').classList.remove('hidden');
+          document.getElementById('micBtn').classList.add('text-rose-500', 'animate-pulse');
+        };
+
+        recognition.onresult = (e) => {
+          const transcript = e.results[0][0].transcript;
+          document.getElementById('roleplayUserInput').value = transcript;
+        };
+
+        recognition.onerror = () => {
+          isRecording = false;
+          document.getElementById('recordingBadge').classList.add('hidden');
+          document.getElementById('micBtn').classList.remove('text-rose-500', 'animate-pulse');
+        };
+
+        recognition.onend = () => {
+          isRecording = false;
+          document.getElementById('recordingBadge').classList.add('hidden');
+          document.getElementById('micBtn').classList.remove('text-rose-500', 'animate-pulse');
+        };
+      }
+
+      if (isRecording) recognition.stop();
+      else recognition.start();
+    }
+
+    /* ==================== AI TOOLS SUB-TABS & LOGIC ==================== */
+    function switchToolSubTab(sub) {
+      if (sub === 'rephrase') {
+        document.getElementById('toolSectionRephrase').classList.remove('hidden');
+        document.getElementById('toolSectionGym').classList.add('hidden');
+        document.getElementById('toolSubTab1').className = "flex-1 py-2 rounded-lg bg-blue-600 text-white transition";
+        document.getElementById('toolSubTab2').className = "flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition";
+      } else {
+        document.getElementById('toolSectionRephrase').classList.add('hidden');
+        document.getElementById('toolSectionGym').classList.remove('hidden');
+        document.getElementById('toolSubTab1').className = "flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition";
+        document.getElementById('toolSubTab2').className = "flex-1 py-2 rounded-lg bg-indigo-600 text-white transition";
+      }
+    }
+
+    function setRephrasePrompt(txt) {
+      document.getElementById('rephraseAppInput').value = txt;
+    }
+
+    async function runAppCorporateRephrase() {
+      const input = document.getElementById('rephraseAppInput');
+      const text = input.value.trim();
+      if (!text) {
+        showToast("Sila taip idea anda dahulu!");
+        return;
+      }
+
+      const btn = document.getElementById('rephraseAppBtn');
+      const box = document.getElementById('rephraseAppResults');
+      btn.disabled = true;
+      btn.innerText = "Gemini sedang memproses 3 gaya korporat...";
+      box.classList.remove('hidden');
+      box.innerHTML = '<p class="text-center text-slate-400 text-xs animate-pulse py-3">Menjana K.I.S.S, Diplomasi, dan Eksekutif A.R.T...</p>';
+
+      try {
+        const prompt = `Transform this rough thought: "${text}" into 3 spoken corporate styles based on Workplace Speaking Hacks:
+1. "kiss": 2-3 short, modular spoken sentences.
+2. "diplomatic": using Validate + Pivot + Concern formula.
+3. "art": Answer -> Reason -> Next Action.
+4. "tip": 1 sentence advice in Malay.
+Respond ONLY with valid JSON with keys "kiss", "diplomatic", "art", "tip".`;
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: "application/json" }
+        };
+
+        const res = await callGemini(apiUrl, payload);
+        const data = JSON.parse(res?.candidates?.[0]?.content?.parts?.[0]?.text);
+
+        box.innerHTML = `
+          <div class="p-3 bg-emerald-950/40 border border-emerald-500/30 rounded-xl space-y-1">
+            <span class="text-emerald-400 text-[10px] font-bold uppercase">1. Gaya K.I.S.S (Ringkas & Modular):</span>
+            <p class="font-mono text-xs text-white">${data.kiss}</p>
+          </div>
+          <div class="p-3 bg-blue-950/40 border border-blue-500/30 rounded-xl space-y-1">
+            <span class="text-blue-400 text-[10px] font-bold uppercase">2. Gaya Diplomasi Korporat:</span>
+            <p class="font-mono text-xs text-white">${data.diplomatic}</p>
+          </div>
+          <div class="p-3 bg-purple-950/40 border border-purple-500/30 rounded-xl space-y-1">
+            <span class="text-purple-400 text-[10px] font-bold uppercase">3. Gaya Eksekutif A.R.T:</span>
+            <p class="font-mono text-xs text-white">${data.art}</p>
+          </div>
+          <p class="text-[10px] text-amber-300 bg-slate-900 p-2 rounded">💡 ${data.tip}</p>
+        `;
+      } catch (e) {
+        box.innerHTML = '<p class="text-rose-400 text-xs">Gagal menjana ayat. Sila cuba lagi.</p>';
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Jana 3 Versi Korporat Berwibawa";
+      }
+    }
+
+    /* Gym Words */
+    const GYM_WORDS = [
+      { word: "INVOICE", hint: "Dokumen bayaran dihantar kepada klien selepas kerja siap." },
+      { word: "BOTTLENECK", hint: "Titik kelewatan dalam proses kerja yang memperlahankan projek." },
+      { word: "RESCHEDULE", hint: "Menunda tarikh mesyuarat ke waktu yang lain." },
+      { word: "STAPLER", hint: "Alat kecil di atas meja untuk mencantumkan kertas." },
+      { word: "EXPIRY DATE", hint: "Tarikh akhir pada bungkusan sebelum produk rosak." }
+    ];
+    let currentGymIndex = 0;
+
+    function generateGymWord() {
+      currentGymIndex = (currentGymIndex + 1) % GYM_WORDS.length;
+      const target = GYM_WORDS[currentGymIndex];
+      document.getElementById('gymWordTitle').innerText = target.word;
+      document.getElementById('gymWordHint').innerText = target.hint;
+      document.getElementById('gymUserDesc').value = '';
+      document.getElementById('gymFeedbackBox').classList.add('hidden');
+    }
+
+    async function submitGymGuess() {
+      const desc = document.getElementById('gymUserDesc').value.trim();
+      const target = GYM_WORDS[currentGymIndex].word;
+      if (!desc) {
+        showToast("Sila taip huraian anda dahulu!");
+        return;
+      }
+
+      const btn = document.getElementById('gymGuessBtn');
+      const box = document.getElementById('gymFeedbackBox');
+      btn.disabled = true;
+      btn.innerText = "Gemini sedang meneka...";
+      box.classList.remove('hidden');
+      box.innerHTML = '<p class="text-indigo-400 animate-pulse text-xs">Menganalisis huraian circumlocution anda...</p>';
+
+      try {
+        const prompt = `Target secret word was "${target}". User described it as: "${desc}".
+Evaluate as a colleague:
+1. "guess": what word did you think of?
+2. "isCorrect": boolean
+3. "score": number 1 to 10
+4. "feedback": brief 2 sentences in Malay explaining if it was clear.
+Respond ONLY with JSON.`;
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: "application/json" }
+        };
+
+        const res = await callGemini(apiUrl, payload);
+        const data = JSON.parse(res?.candidates?.[0]?.content?.parts?.[0]?.text);
+
+        box.innerHTML = `
+          <div class="flex justify-between items-center">
+            <span class="font-bold ${data.isCorrect ? 'text-emerald-400' : 'text-amber-400'}">
+              ${data.isCorrect ? '✓ Tekaan Tepat: ' + data.guess : '? Tekaan AI: ' + data.guess}
+            </span>
+            <span class="font-mono font-bold text-indigo-300">Skor: ${data.score}/10</span>
+          </div>
+          <p class="text-slate-300 text-[11px] leading-relaxed">${data.feedback}</p>
+        `;
+      } catch (e) {
+        box.innerHTML = '<p class="text-rose-400 text-xs">Gagal memproses tekaan.</p>';
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Hantar Huraian & Minta AI Teka";
+      }
+    }
+
+    /* ==================== INITIALIZATION ==================== */
+    window.onload = function() {
+      renderCheatSheet();
+      renderTrackerDays();
+      resetRoleplayChat();
+      updateDashboardProgressUI();
+    };
+  </script>
+</body>
+</html>
