@@ -1378,8 +1378,7 @@
       chatBox.scrollTop = chatBox.scrollHeight;
 
       try {
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-        const payload = {
+const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=...`;        const payload = {
           contents: roleplayHistory,
           systemInstruction: { parts: [{ text: SCENARIOS[currentScenario].system }] },
           generationConfig: { temperature: 0.7, maxOutputTokens: 120 }
