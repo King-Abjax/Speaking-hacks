@@ -70,7 +70,7 @@
     }
 
     .safe-bottom {
-      padding-bottom: calc(env(safe-area-inset-bottom) + 5rem);
+      padding-bottom: calc(env(safe-area-inset-bottom) + 3.8rem);
     }
 
     .safe-top {
@@ -91,10 +91,10 @@
 <body class="antialiased bg-[#070C18] text-slate-200 min-h-screen flex flex-col justify-between">
 
   <!-- ==================== TOP APP HEADER ==================== -->
-  <header class="sticky top-0 z-40 bg-[#0B132B]/90 backdrop-blur-xl border-b border-slate-800 safe-top px-4 py-3 shadow-lg">
+  <header class="sticky top-0 z-40 bg-[#0B132B]/90 backdrop-blur-xl border-b border-slate-800 safe-top px-4 py-2.5 shadow-lg">
     <div class="max-w-2xl mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-2.5">
-        <button onclick="toggleChapterDrawer(true)" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 btn-press transition" title="Senarai Bab">
+        <button onclick="toggleChapterDrawer(true)" class="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 btn-press transition" title="Senarai Bab">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
         </button>
         <div>
@@ -107,11 +107,11 @@
       </div>
 
       <div class="flex items-center gap-1.5">
-        <button onclick="switchAppTab('coach')" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-md shadow-emerald-600/20 btn-press">
+        <button onclick="switchAppTab('coach')" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center gap-1 shadow-md shadow-emerald-600/20 btn-press">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
           <span class="hidden sm:inline">AI Speaking</span> Coach
         </button>
-        <button onclick="togglePWAInstallModal(true)" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition" title="Pasang di Telefon">
+        <button onclick="togglePWAInstallModal(true)" class="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition" title="Pasang di Telefon">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
         </button>
       </div>
@@ -313,7 +313,7 @@
           <h2 class="font-heading font-extrabold text-sm text-emerald-300 flex items-center gap-1.5">
             <span>🎙️</span> AI Speaking Coach & Sparring Lab
           </h2>
-          <span class="text-[9px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full">gemini-3-flash</span>
+          <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full">gemini-1.5-flash</span>
         </div>
         <p class="text-[11px] text-slate-400">
           Latih refleks bercakap Bahasa Inggeris 24 jam sehari. AI akan membalas pendek (1-2 ayat) untuk melatih tindak balas spontan anda.
@@ -505,37 +505,37 @@
 
   </main>
 
-  <!-- ==================== BOTTOM NAVIGATION BAR ==================== -->
-  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-[#0B132B]/95 backdrop-blur-xl border-t border-slate-800 px-2 py-2 safe-bottom">
-    <div class="max-w-2xl mx-auto flex items-center justify-around text-[10px]">
+  <!-- ==================== BOTTOM NAVIGATION BAR (SLIM & COMPACT) ==================== -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-[#0B132B]/95 backdrop-blur-xl border-t border-slate-800 px-1 py-1.5 safe-bottom">
+    <div class="max-w-md mx-auto flex items-center justify-around text-[9px]">
       
       <!-- Nav 1: Modul / Chapters -->
-      <button onclick="switchAppTab('dashboard')" id="nav-btn-dashboard" class="nav-item active flex flex-col items-center gap-1 text-blue-400 font-bold transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+      <button onclick="switchAppTab('dashboard')" id="nav-btn-dashboard" class="nav-item active flex flex-col items-center gap-0.5 text-blue-400 font-bold transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
         <span>Modul</span>
       </button>
 
       <!-- Nav 2: AI Coach -->
-      <button onclick="switchAppTab('coach')" id="nav-btn-coach" class="nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+      <button onclick="switchAppTab('coach')" id="nav-btn-coach" class="nav-item flex flex-col items-center gap-0.5 text-slate-400 font-semibold transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
         <span>AI Coach</span>
       </button>
 
       <!-- Nav 3: Quick Script -->
-      <button onclick="switchAppTab('cheatsheet')" id="nav-btn-cheatsheet" class="nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-        <span>Skrip Pantas</span>
+      <button onclick="switchAppTab('cheatsheet')" id="nav-btn-cheatsheet" class="nav-item flex flex-col items-center gap-0.5 text-slate-400 font-semibold transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <span>Skrip</span>
       </button>
 
       <!-- Nav 4: 30-Day Tracker -->
-      <button onclick="switchAppTab('tracker')" id="nav-btn-tracker" class="nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+      <button onclick="switchAppTab('tracker')" id="nav-btn-tracker" class="nav-item flex flex-col items-center gap-0.5 text-slate-400 font-semibold transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         <span>Tracker</span>
       </button>
 
       <!-- Nav 5: AI Tools -->
-      <button onclick="switchAppTab('tools')" id="nav-btn-tools" class="nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+      <button onclick="switchAppTab('tools')" id="nav-btn-tools" class="nav-item flex flex-col items-center gap-0.5 text-slate-400 font-semibold transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
         <span>AI Tools</span>
       </button>
 
@@ -636,7 +636,6 @@
 
   <script>
     /* ==================== CHAPTER CONTENT REPOSITORY ==================== */
-    // Complete content preserved accurately from the original document
     const CHAPTERS_DATA = {
       intro: {
         id: "intro",
@@ -794,7 +793,7 @@
             </div>
 
             <div class="p-3 bg-emerald-950/30 border border-emerald-500/30 rounded-xl space-y-1.5">
-              <strong class="text-emerald-300 text-xs block">Prompt Roleplay 2: Temu Duga Eksekutif (Formula P.E.E.L)</strong>
+              <strong class="text-emerald-300 text-xs block">Prompt Roleplay 2: Temu Duga Eksekutif (Formula P.E.EL)</strong>
               <div class="bg-slate-950 p-2.5 rounded font-mono text-[10.5px] text-slate-200">
                 "Act as an HR Manager interviewing me for an executive role. Ask me one interview question at a time in English. Wait for my response. If I pause too long, prompt me to continue."
               </div>
@@ -1008,9 +1007,9 @@
         const el = document.getElementById(`nav-btn-${btn}`);
         if (el) {
           if (btn === tabId || (tabId === 'reader' && btn === 'dashboard')) {
-            el.className = "nav-item active flex flex-col items-center gap-1 text-blue-400 font-bold transition";
+            el.className = "nav-item active flex flex-col items-center gap-0.5 text-blue-400 font-bold transition";
           } else {
-            el.className = "nav-item flex flex-col items-center gap-1 text-slate-400 font-semibold transition";
+            el.className = "nav-item flex flex-col items-center gap-0.5 text-slate-400 font-semibold transition";
           }
         }
       });
@@ -1054,9 +1053,7 @@
       document.getElementById('readerPrevBtn').disabled = currentChapterIndex === 0;
       document.getElementById('readerNextBtn').disabled = currentChapterIndex === CHAPTER_KEYS.length - 1;
 
-      // Update Mark Done status button text
       updateDoneButtonUI();
-
       switchAppTab('reader');
     }
 
@@ -1116,7 +1113,6 @@
       document.getElementById('overallProgressText').innerText = `${pct}% Selesai (${count}/${total} Bab)`;
       document.getElementById('overallProgressBar').style.width = `${pct}%`;
 
-      // Update badges
       CHAPTER_KEYS.forEach(key => {
         const badge = document.getElementById(`badge-${key}`);
         const drawerCheck = document.getElementById(`drawer-check-${key}`);
@@ -1214,7 +1210,7 @@
     }
 
     /* ==================== GEMINI API INTEGRATION ==================== */
-    const apiKey = ""; // Runtime automatically provides key
+    const apiKey = "AQ.Ab8RN6JEwn_ZwUff87QsruHImkPjxD6bR9EW1xZlquiHP93cNg";
 
     async function callGemini(apiUrl, payload, maxRetries = 3) {
       let delay = 1000;
@@ -1222,7 +1218,10 @@
         try {
           const res = await fetch(apiUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'x-goog-api-key': apiKey
+            },
             body: JSON.stringify(payload)
           });
           if (res.ok) return await res.json();
@@ -1243,50 +1242,6 @@
 
     // Audio Playback with Web Speech API fallback
     async function playVoiceAudio(text) {
-      try {
-        const ttsUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-        const payload = {
-          contents: [{ parts: [{ text }] }],
-          generationConfig: {
-            responseModalities: ["AUDIO"],
-            speechConfig: {
-              voiceConfig: { prebuiltVoiceConfig: { voiceName: "Puck" } }
-            }
-          }
-        };
-        const res = await callGemini(ttsUrl, payload);
-        const part = res?.candidates?.[0]?.content?.parts?.[0];
-        const audioData = part?.inlineData?.data;
-        const mimeType = part?.inlineData?.mimeType;
-
-        if (audioData && mimeType && mimeType.startsWith("audio/")) {
-          const sampleRateMatch = mimeType.match(/rate=(\d+)/);
-          const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 24000;
-          const binaryString = window.atob(audioData);
-          const bytes = new Uint8Array(binaryString.length);
-          for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
-          const pcm16 = new Int16Array(bytes.buffer);
-          
-          // WAV Header construction
-          const wavBuffer = new ArrayBuffer(44 + pcm16.length * 2);
-          const view = new DataView(wavBuffer);
-          const writeStr = (offset, str) => { for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i)); };
-          writeStr(0, 'RIFF'); view.setUint32(4, 36 + pcm16.length * 2, true); writeStr(8, 'WAVE');
-          writeStr(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
-          view.setUint16(22, 1, true); view.setUint32(24, sampleRate, true);
-          view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true);
-          view.setUint16(34, 16, true); writeStr(36, 'data'); view.setUint32(40, pcm16.length * 2, true);
-          let offset = 44;
-          for (let i = 0; i < pcm16.length; i++) { view.setInt16(offset, pcm16[i], true); offset += 2; }
-          const blob = new Blob([view], { type: 'audio/wav' });
-          const audio = new Audio(URL.createObjectURL(blob));
-          audio.play();
-          return;
-        }
-      } catch (err) {
-        // Fallback to Web Speech API smoothly
-      }
-
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utt = new SpeechSynthesisUtterance(text);
@@ -1378,7 +1333,8 @@
       chatBox.scrollTop = chatBox.scrollHeight;
 
       try {
-const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=...`;        const payload = {
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const payload = {
           contents: roleplayHistory,
           systemInstruction: { parts: [{ text: SCENARIOS[currentScenario].system }] },
           generationConfig: { temperature: 0.7, maxOutputTokens: 120 }
@@ -1395,6 +1351,7 @@ const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1
         playVoiceAudio(reply);
 
       } catch (e) {
+        console.error("Gemini Error:", e);
         const tEl = document.getElementById('aiTyping');
         if (tEl) tEl.remove();
         appendMessage("model", "Network glitch. Could you please repeat that?");
@@ -1426,7 +1383,7 @@ Provide a JSON evaluation with:
 2. "vocab": array of 2 objects { "word": "corporate word", "meaning": "Malay meaning", "example": "sample sentence" }
 3. "encouragement": short 1-sentence motivation in Malay.`;
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
         const payload = {
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { responseMimeType: "application/json" }
@@ -1543,7 +1500,7 @@ Provide a JSON evaluation with:
 4. "tip": 1 sentence advice in Malay.
 Respond ONLY with valid JSON with keys "kiss", "diplomatic", "art", "tip".`;
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
         const payload = {
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { responseMimeType: "application/json" }
@@ -1618,7 +1575,7 @@ Evaluate as a colleague:
 4. "feedback": brief 2 sentences in Malay explaining if it was clear.
 Respond ONLY with JSON.`;
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
         const payload = {
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { responseMimeType: "application/json" }
